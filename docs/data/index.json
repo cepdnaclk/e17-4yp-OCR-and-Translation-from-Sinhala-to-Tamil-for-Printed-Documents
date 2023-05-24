@@ -18,12 +18,12 @@
     ],
     "supervisors": [
         {
-            "name": "Dr. Supervisor 1",
-            "email": "email@eng.pdn.ac.lk"
+            "name": "Prof. roshan Ragel",
+            "email": "roshanr@eng.pdn.ac.lk"
         },
         {
-            "name": "Dr. Supervisor 2",
-            "email": "email@eng.pdn.ac.lk"
+            "name": "Dr.Asitha Bandaranayake",
+            "email": "asithab@eng.pdn.ac.lk"
         }
     ],
     "media": [
