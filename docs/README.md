@@ -3,24 +3,25 @@ layout: home
 permalink: index.html
 
 # Please update this with your repository name and title
-repository-name: eYY-4yp-project-template
+repository-name: e17-4yp-OCR-and-Translation-from-Sinhala-to-Tamil-for-Printed-Documents
 title:
 ---
 
 [comment]: # "This is the standard layout for the project, but you can clean this and use your own template"
 
-# Project Title
+# Optical Character Recognition and Translation from Sinhala to Tamil for Printed Documents
+
 
 #### Team
 
-- eNumber, Name, [email](mailto:name@email.com)
-- eNumber, Name, [email](mailto:name@email.com)
-- eNumber, Name, [email](mailto:name@email.com)
+- E/17/122, Isthikar F.S., [email](mailto:e17122@eng.pdn.ac.lk)
+- E/17/153, Karunachandra R.H.I.O., [email](mailto:e17153@eng.pdn.ac.lk)
+- E/17/294, Rossmaree D.M., [email](mailto:e17294@eng.pdn.ac.lk)
 
 #### Supervisors
 
-- Name, [email](mailto:name@eng.pdn.ac.lk)
-- Name, [email](mailto:name@eng.pdn.ac.lk)
+- Prof. roshan Ragel, [email](mailto:roshanr@eng.pdn.ac.lk)
+- Dr.Asitha Bandaranayake, [email](mailto:asithab@eng.pdn.ac.lk)
 
 #### Table of content
 
