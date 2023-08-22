@@ -1,40 +1,49 @@
-const express=require('express');
+const express = require('express');
 const app = express();
-const multer=require('multer');
-const preprocess_mod=require('./preprocess');
-const ocr_mod=require('./ocr');
-const translate_mod=require('./translate');
+const multer = require('multer');
+const translate_mod = require('./translate'); // Your translation module
+const fs = require('fs'); // Required for file operations
+const path = require('path'); // Import the path module
 
-//storing images to disk
-const storage=multer.diskStorage({
-    destination:(req,file,cb)=>{
-        cb(null,'../tmp/uploads');
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, '../tmp/uploads_txt'); // Change to your desired directory
     },
-    filename:(req,file,cb)=>{
-        cb(null,file.originalname);
+    filename: (req, file, cb) => {
+        cb(null, file.originalname);
     }
-})
+});
 
-const upload=multer({storage:storage})
+const upload = multer({ storage: storage });
 
-app.post('/api/upload',upload.single('uploadedImage'),async (req,res)=>{
+// Serve static files from the public directory
+app.use(express.static('public'));
+
+app.get('/', (req, res) => {
+    const frontendHTML = fs.readFileSync(path.join(__dirname, 'frontend.html'), 'utf-8');
+    res.send(frontendHTML);
+});
+
+app.post('/api/upload_txt', upload.single('uploadedText'), async (req, res) => {
     console.log(req.file);
     try {
-        preprocess_mod.preprocess_image(req.file.filename)
-            .then( img_buffer => {
-                return ocr_mod.ocr_extract(img_buffer);                   
-            }).then( text =>{
-                return translate_mod.translateText(text);
-            }).then( translated_text => {
-                return res.json({
-                        message:translated_text
-                });
-            })       
+        const uploadedFilePath = req.file.path;
+        const uploadedText = fs.readFileSync(uploadedFilePath, 'utf-8');
+
+        // Perform translation on the uploaded text
+        const translatedText = await translate_mod.translateText(uploadedText);
+
+        return res.json({
+            message: translatedText
+        });
     } catch (error) {
         console.error(error);
+        return res.status(500).json({
+            error: 'An error occurred'
+        });
     }
-})
+});
 
-app.listen(4000,()=>{
-    console.log("Server is running on port 4000");
-})
+app.listen(4000, () => {
+    console.log("Server is running on port 4000 for text file uploads and translation");
+});
