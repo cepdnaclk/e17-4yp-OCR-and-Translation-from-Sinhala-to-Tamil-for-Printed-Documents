@@ -1,11 +1,9 @@
-// frontend.js
-//console.log("frontend is active")
 const mainDiv = document.getElementById("main");
 
 const frontendHTML = `
-<h1>Text File Upload</h1>
+<h1>File Upload</h1>
 <form id="uploadForm">
-    <input type="file" id="fileInput" accept=".txt" />
+    <input type="file" id="fileInput" accept=".txt,.doc,.docx" />
     <button type="submit">Upload</button>
 </form>
 <div id="message"></div>
@@ -25,10 +23,10 @@ document.getElementById("uploadForm").addEventListener("submit", async function 
     }
 
     const formData = new FormData();
-    formData.append("uploadedText", file);
+    formData.append("uploadedFile", file);
 
     try {
-        const response = await fetch("/api/upload_txt", {
+        const response = await fetch("/api/upload_file", {
             method: "POST",
             body: formData,
         });

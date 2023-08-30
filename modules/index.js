@@ -4,10 +4,11 @@ const multer = require('multer');
 const translate_mod = require('./translate'); // Your translation module
 const fs = require('fs'); // Required for file operations
 const path = require('path'); // Import the path module
+const mammoth = require('mammoth'); // For extracting text from .doc/.docx files
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, '../tmp/uploads_txt'); // Change to your desired directory
+        cb(null, '../tmp/uploads_files'); // Change to your desired directory
     },
     filename: (req, file, cb) => {
         cb(null, file.originalname);
@@ -16,7 +17,6 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-// Serve static files from the public directory
 app.use(express.static('public'));
 
 app.get('/', (req, res) => {
@@ -24,13 +24,38 @@ app.get('/', (req, res) => {
     res.send(frontendHTML);
 });
 
-app.post('/api/upload_txt', upload.single('uploadedText'), async (req, res) => {
+async function extractTextFromDoc(docFilePath) {
+    console.log("Came to extract function")
+    return new Promise((resolve, reject) => {
+        mammoth.extractRawText({ path: docFilePath })
+            .then(result => {
+                resolve(result.value);
+            })
+            .catch(error => {
+                console.log("Error in mammoth")
+                reject(error);
+            });
+    });
+}
+
+app.post('/api/upload_file', upload.single('uploadedFile'), async (req, res) => {
     console.log(req.file);
     try {
         const uploadedFilePath = req.file.path;
-        const uploadedText = fs.readFileSync(uploadedFilePath, 'utf-8');
+        let uploadedText;
 
-        // Perform translation on the uploaded text
+        if (req.file.originalname.endsWith('.txt')) {
+            uploadedText = fs.readFileSync(uploadedFilePath, 'utf-8');
+        } else if (req.file.originalname.endsWith('.doc') || req.file.originalname.endsWith('.docx')) {
+            console.log("Its a doc!")
+            uploadedText = await extractTextFromDoc(uploadedFilePath);
+            console.log("Extracted Text:", uploadedText);
+        } else {
+            return res.status(400).json({
+                error: 'Unsupported file format'
+            });
+        }
+
         const translatedText = await translate_mod.translateText(uploadedText);
 
         return res.json({
@@ -45,5 +70,5 @@ app.post('/api/upload_txt', upload.single('uploadedText'), async (req, res) => {
 });
 
 app.listen(4000, () => {
-    console.log("Server is running on port 4000 for text file uploads and translation");
+    console.log("Server is running on port 4000 for file uploads and translation");
 });
