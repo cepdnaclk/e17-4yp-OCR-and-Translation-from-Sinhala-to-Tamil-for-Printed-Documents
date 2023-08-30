@@ -7,12 +7,12 @@ const path = require('path'); // Import the path module
 const mammoth = require('mammoth'); // For extracting text from .doc/.docx files
 
 const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, '../tmp/uploads_files'); // Change to your desired directory
-    },
-    filename: (req, file, cb) => {
-        cb(null, file.originalname);
-    }
+  destination: (req, file, cb) => {
+    cb(null, '../tmp/uploads_files'); // Change to your desired directory
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.originalname);
+  },
 });
 
 const upload = multer({ storage: storage });
@@ -20,55 +20,79 @@ const upload = multer({ storage: storage });
 app.use(express.static('public'));
 
 app.get('/', (req, res) => {
-    const frontendHTML = fs.readFileSync(path.join(__dirname, 'frontend.html'), 'utf-8');
-    res.send(frontendHTML);
+  const frontendHTML = fs.readFileSync(
+    path.join(__dirname, 'frontend.html'),
+    'utf-8'
+  );
+  res.send(frontendHTML);
 });
 
 async function extractTextFromDoc(docFilePath) {
-    console.log("Came to extract function")
-    return new Promise((resolve, reject) => {
-        mammoth.extractRawText({ path: docFilePath })
-            .then(result => {
-                resolve(result.value);
-            })
-            .catch(error => {
-                console.log("Error in mammoth")
-                reject(error);
-            });
-    });
+  console.log('Came to extract function');
+  return new Promise((resolve, reject) => {
+    mammoth
+      .extractRawText({ path: docFilePath })
+      .then((result) => {
+        resolve(result.value);
+      })
+      .catch((error) => {
+        console.log('Error in mammoth');
+        reject(error);
+      });
+  });
 }
 
-app.post('/api/upload_file', upload.single('uploadedFile'), async (req, res) => {
+app.post(
+  '/api/upload_file',
+  upload.single('uploadedFile'),
+  async (req, res) => {
     console.log(req.file);
     try {
-        const uploadedFilePath = req.file.path;
-        let uploadedText;
+      const uploadedFilePath = req.file.path;
+      //const uploadedText = fs.readFileSync(uploadedFilePath, 'utf-8');
 
-        if (req.file.originalname.endsWith('.txt')) {
-            uploadedText = fs.readFileSync(uploadedFilePath, 'utf-8');
-        } else if (req.file.originalname.endsWith('.doc') || req.file.originalname.endsWith('.docx')) {
-            console.log("Its a doc!")
-            uploadedText = await extractTextFromDoc(uploadedFilePath);
-            console.log("Extracted Text:", uploadedText);
-        } else {
-            return res.status(400).json({
-                error: 'Unsupported file format'
-            });
-        }
+      console.log(req.file.mimetype);
+      const mimeType = req.file.mimetype;
 
-        const translatedText = await translate_mod.translateText(uploadedText);
+      if (mimeType.startsWith('text')) {
+        // Handle text file processing here
+        console.log("fileType = 'Text'");
+      } else if (
+        mimeType === 'application/msword' ||
+        mimeType ===
+          'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+      ) {
+        // Handle document processing here
+        console.log("fileType = 'DOC'");
+      } else if (mimeType.startsWith('image')) {
+        // Handle image file processing here
+        console.log("fileType = 'Image'");
+      } else if (mimeType === 'application/pdf') {
+        // Handle PDF file processing here
+        console.log("fileType = 'PDF'");
+      } else {
+        // Handle other or unknown file types here
+        console.log("fileType = 'Unknown'");
+      }
 
-        return res.json({
-            message: translatedText
-        });
+      const uploadedText = fs.readFileSync(uploadedFilePath, 'utf-8');
+      // Perform translation on the uploaded text
+      const translatedText = await translate_mod.translateText(uploadedText);
+
+      return res.json({
+        message: translatedText,
+      });
     } catch (error) {
-        console.error(error);
-        return res.status(500).json({
-            error: 'An error occurred'
-        });
+      console.error(error);
+      return res.status(500).json({
+        error: 'An error occurred',
+      });
     }
-});
+  }
+);
 
 app.listen(4000, () => {
-    console.log("Server is running on port 4000 for file uploads and translation");
+  console.log(
+    'Server is running on port 4000 for file uploads and translation'
+  );
 });
