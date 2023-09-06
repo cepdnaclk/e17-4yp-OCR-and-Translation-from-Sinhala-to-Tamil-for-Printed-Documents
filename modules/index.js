@@ -5,6 +5,7 @@ const translate_mod = require('./translate'); // Your translation module
 const fs = require('fs'); // Required for file operations
 const path = require('path'); // Import the path module
 const mammoth = require('mammoth'); // For extracting text from .doc/.docx files
+const { ocr_extract } = require('./ocr');
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -54,6 +55,10 @@ app.post(
       console.log(req.file.mimetype);
       const mimeType = req.file.mimetype;
 
+      let uploadedText;
+      let ocrText;
+      let translatedText;
+
       if (mimeType.startsWith('text')) {
         // Handle text file processing here
         console.log("fileType = 'Text'");
@@ -67,17 +72,21 @@ app.post(
       } else if (mimeType.startsWith('image')) {
         // Handle image file processing here
         console.log("fileType = 'Image'");
+        ocrText = await ocr_extract(uploadedFilePath);
+        translatedText = await translate_mod.translateText(ocrText);
       } else if (mimeType === 'application/pdf') {
         // Handle PDF file processing here
         console.log("fileType = 'PDF'");
+        //ocrText = await ocr_extract(uploadedFilePath);
+        //translatedText = await translate_mod.translateText(ocrText);
       } else {
         // Handle other or unknown file types here
         console.log("fileType = 'Unknown'");
       }
 
-      const uploadedText = fs.readFileSync(uploadedFilePath, 'utf-8');
+      //const uploadedText = fs.readFileSync(uploadedFilePath, 'utf-8');
       // Perform translation on the uploaded text
-      const translatedText = await translate_mod.translateText(uploadedText);
+      //const translatedText = await translate_mod.translateText(uploadedText);
 
       return res.json({
         message: translatedText,
