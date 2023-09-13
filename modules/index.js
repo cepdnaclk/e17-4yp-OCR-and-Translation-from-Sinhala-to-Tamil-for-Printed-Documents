@@ -4,7 +4,7 @@ const multer = require('multer');
 const translate_mod = require('./translate'); // Your translation module
 const fs = require('fs'); // Required for file operations
 const path = require('path'); // Import the path module
-const mammoth = require('mammoth'); // For extracting text from .doc/.docx files
+const textract = require('textract'); // Import the textract library
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -24,30 +24,16 @@ app.get('/', (req, res) => {
     res.send(frontendHTML);
 });
 
-async function extractTextFromDoc(docFilePath) {
-    console.log("Came to extract function")
-    return new Promise((resolve, reject) => {
-        mammoth.extractRawText({ path: docFilePath })
-            .then(result => {
-                resolve(result.value);
-            })
-            .catch(error => {
-                console.log("Error in mammoth")
-                reject(error);
-            });
-    });
-}
-
 app.post('/api/upload_file', upload.single('uploadedFile'), async (req, res) => {
     console.log(req.file);
     try {
         const uploadedFilePath = req.file.path;
         let uploadedText;
 
-        if (req.file.originalname.endsWith('.txt')) {
+        if (req.file.originalname.endsWith('.txt') || req.file.originalname.endsWith('.md') || req.file.originalname.endsWith('.log')) {
             uploadedText = fs.readFileSync(uploadedFilePath, 'utf-8');
-        } else if (req.file.originalname.endsWith('.doc') || req.file.originalname.endsWith('.docx')) {
-            console.log("Its a doc!")
+        } else if (req.file.originalname.endsWith('.doc') || req.file.originalname.endsWith('.docx') || req.file.originalname.endsWith('.rtf')) {
+            console.log("It's a document!");
             uploadedText = await extractTextFromDoc(uploadedFilePath);
             console.log("Extracted Text:", uploadedText);
         } else {
@@ -68,6 +54,19 @@ app.post('/api/upload_file', upload.single('uploadedFile'), async (req, res) => 
         });
     }
 });
+
+function extractTextFromDoc(docFilePath) {
+    return new Promise((resolve, reject) => {
+        textract.fromFileWithPath(docFilePath, (error, text) => {
+            if (error) {
+                console.log("Error in textract");
+                reject(error);
+            } else {
+                resolve(text);
+            }
+        });
+    });
+}
 
 app.listen(4000, () => {
     console.log("Server is running on port 4000 for file uploads and translation");

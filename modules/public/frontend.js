@@ -3,7 +3,7 @@ const mainDiv = document.getElementById("main");
 const frontendHTML = `
 <h1>File Upload</h1>
 <form id="uploadForm">
-    <input type="file" id="fileInput" accept=".txt,.doc,.docx" />
+    <input type="file" id="fileInput" accept=".txt,.md,.log,.doc,.docx,.rtf,.odt" />
     <button type="submit">Upload</button>
 </form>
 <div id="message"></div>
