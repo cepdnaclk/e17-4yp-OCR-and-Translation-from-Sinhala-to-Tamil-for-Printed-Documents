@@ -6,6 +6,12 @@ const fs = require('fs'); // Required for file operations
 const path = require('path'); // Import the path module
 const mammoth = require('mammoth'); // For extracting text from .doc/.docx files
 const { ocr_extract } = require('./ocr');
+const {
+  convertPdfToImage,
+  getAllTextFromImages,
+  findFilesInDirectory,
+  ocrImage,
+} = require('./pdfExtract');
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -51,13 +57,15 @@ app.post(
     try {
       const uploadedFilePath = req.file.path;
       //const uploadedText = fs.readFileSync(uploadedFilePath, 'utf-8');
-
+      console.log(uploadedFilePath);
       console.log(req.file.mimetype);
       const mimeType = req.file.mimetype;
 
       let uploadedText;
       let ocrText;
       let translatedText;
+      let pdfImage = '../tmp/pdf_image/page-1.png';
+      let pdfImagePath = '../tmp/pdf_image/';
 
       if (mimeType.startsWith('text')) {
         // Handle text file processing here
@@ -77,8 +85,14 @@ app.post(
       } else if (mimeType === 'application/pdf') {
         // Handle PDF file processing here
         console.log("fileType = 'PDF'");
-        //ocrText = await ocr_extract(uploadedFilePath);
-        //translatedText = await translate_mod.translateText(ocrText);
+        await convertPdfToImage(uploadedFilePath);
+        const ocrText = await getAllTextFromImages(
+          '../tmp/pdf_image/',
+          '../tmp/pdf_text/pdf_text.txt'
+        );
+        console.log(ocrText);
+        translatedText = await translate_mod.translateText(ocrText);
+        console.log(translatedText);
       } else {
         // Handle other or unknown file types here
         console.log("fileType = 'Unknown'");
