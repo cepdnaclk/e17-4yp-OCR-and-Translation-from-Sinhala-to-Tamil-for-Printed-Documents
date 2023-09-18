@@ -5,6 +5,8 @@ const translate_mod = require('./translate'); // Your translation module
 const fs = require('fs'); // Required for file operations
 const path = require('path'); // Import the path module
 const textract = require('textract'); // Import the textract library
+const cors = require("cors");
+
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -16,6 +18,9 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage });
+
+app.use(cors());
+
 
 app.use(express.static('public'));
 
@@ -67,6 +72,7 @@ function extractTextFromDoc(docFilePath) {
         });
     });
 }
+
 
 app.listen(4000, () => {
     console.log("Server is running on port 4000 for file uploads and translation");
