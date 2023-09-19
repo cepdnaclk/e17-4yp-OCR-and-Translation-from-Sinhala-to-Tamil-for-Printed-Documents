@@ -27,11 +27,11 @@ const Home = () => {
     }
 
     const formData = new FormData();
-    formData.append("image", selectedImage);
+    formData.append("uploadedFile", selectedImage);
 
     try {
       const response = await axios.post(
-        "http://localhost:4000/api/upload",
+        "http://localhost:4000/api/upload_file",
         formData,
         {
           headers: {
