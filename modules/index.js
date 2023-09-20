@@ -62,28 +62,36 @@ app.post(
       console.log(req.file.mimetype);
       const mimeType = req.file.mimetype;
 
-        
       let uploadedText;
       let ocrText;
       let translatedText;
       let pdfImage = '../tmp/pdf_image/page-1.png';
       let pdfImagePath = '../tmp/pdf_image/';
 
-    if (req.file.originalname.endsWith('.txt') || req.file.originalname.endsWith('.md') || req.file.originalname.endsWith('.log')) {
+      if (
+        req.file.originalname.endsWith('.txt') ||
+        req.file.originalname.endsWith('.md') ||
+        req.file.originalname.endsWith('.log')
+      ) {
         uploadedText = fs.readFileSync(uploadedFilePath, 'utf-8');
         translatedText = await translate_mod.translateText(uploadedText);
         console.log(translatedText);
-    } else if (req.file.originalname.endsWith('.doc') || req.file.originalname.endsWith('.docx') || req.file.originalname.endsWith('.rtf')) {
+      } else if (
+        req.file.originalname.endsWith('.doc') ||
+        req.file.originalname.endsWith('.docx') ||
+        req.file.originalname.endsWith('.rtf')
+      ) {
         console.log("It's a document!");
         uploadedText = await extractTextFromDoc(uploadedFilePath);
         translatedText = await translate_mod.translateText(uploadedText);
+        console.log('Extracted Text:', uploadedText);
         console.log(translatedText);
-        console.log("Extracted Text:", uploadedText);
-    } else if (mimeType.startsWith('image')) {
+      } else if (mimeType.startsWith('image')) {
         // Handle image file processing here
         console.log("fileType = 'Image'");
         ocrText = await ocr_extract(uploadedFilePath);
         translatedText = await translate_mod.translateText(ocrText);
+        console.log(translatedText);
       } else if (mimeType === 'application/pdf') {
         // Handle PDF file processing here
         console.log("fileType = 'PDF'");
@@ -117,16 +125,16 @@ app.post(
 );
 
 function extractTextFromDoc(docFilePath) {
-    return new Promise((resolve, reject) => {
-        textract.fromFileWithPath(docFilePath, (error, text) => {
-            if (error) {
-                console.log("Error in textract");
-                reject(error);
-            } else {
-                resolve(text);
-            }
-        });
+  return new Promise((resolve, reject) => {
+    textract.fromFileWithPath(docFilePath, (error, text) => {
+      if (error) {
+        console.log('Error in textract');
+        reject(error);
+      } else {
+        resolve(text);
+      }
     });
+  });
 }
 
 app.listen(4000, () => {
