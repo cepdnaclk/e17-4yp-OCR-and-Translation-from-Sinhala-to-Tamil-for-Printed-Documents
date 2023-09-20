@@ -116,7 +116,7 @@ const Home = () => {
             {!selectedImage && (
               <input
                 type="file"
-                accept="image/*"
+                accept="*/*"
                 id="fileInput"
                 onChange={handleImageChange}
                 ref={fileInputRef}
