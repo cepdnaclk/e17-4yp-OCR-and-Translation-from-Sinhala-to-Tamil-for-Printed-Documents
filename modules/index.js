@@ -71,9 +71,13 @@ app.post(
 
     if (req.file.originalname.endsWith('.txt') || req.file.originalname.endsWith('.md') || req.file.originalname.endsWith('.log')) {
         uploadedText = fs.readFileSync(uploadedFilePath, 'utf-8');
+        translatedText = await translate_mod.translateText(uploadedText);
+        console.log(translatedText);
     } else if (req.file.originalname.endsWith('.doc') || req.file.originalname.endsWith('.docx') || req.file.originalname.endsWith('.rtf')) {
         console.log("It's a document!");
         uploadedText = await extractTextFromDoc(uploadedFilePath);
+        translatedText = await translate_mod.translateText(uploadedText);
+        console.log(translatedText);
         console.log("Extracted Text:", uploadedText);
     } else if (mimeType.startsWith('image')) {
         // Handle image file processing here
