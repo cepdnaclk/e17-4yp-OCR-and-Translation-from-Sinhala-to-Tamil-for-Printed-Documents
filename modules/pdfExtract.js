@@ -2,6 +2,7 @@ const pdfPoppler = require('pdf-poppler');
 const fs = require('fs').promises; // Import fs.promises to use asynchronous functions
 const tesseract = require('tesseract.js');
 const { spawn } = require('child_process');
+const path = require('path');
 const { ocr_extract } = require('./ocr'); // Import the ocr_extract function from the ocr.js file
 async function convertPdfToImage(pdfPath) {
   const outputPath = '../tmp/pdf_image/';
@@ -12,6 +13,13 @@ async function convertPdfToImage(pdfPath) {
     page: null, // Specify the page number here to convert a specific page, otherwise null to convert all pages
   };
   try {
+    const outputDir = path.resolve(__dirname, outputPath);
+    try {
+      await fs.access(outputDir); // Check if the directory exists asynchronously
+    } catch (error) {
+      // If the directory doesn't exist, create it
+      await fs.mkdir(outputDir, { recursive: true });
+    }
     await pdfPoppler.convert(pdfPath, opts);
     console.log('PDF converted to image successfully!');
   } catch (error) {
