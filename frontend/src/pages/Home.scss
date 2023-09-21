@@ -6,6 +6,10 @@
   
 }
 
+.container-1{
+  min-height:100vh;
+}
+
 .header{
     height:15vh;
     background-color: #B6A0A7;
@@ -13,10 +17,41 @@
     justify-content: center;
     align-items: center;
 }
+
+
+.leftBox{
+  margin-left: 12%;
+}
+
+.logo{
+  height: auto;
+  width: 20%;
+}
+
+
+.addbutton{
+  height: auto;
+    width: 20%;
+}
+
+.addbutton:hover {
+    transform: scale(1.1); /* Increase the scale when hovered */
+    box-shadow: 0 0 0px rgba(0, 0, 0, 0.2); /* Add a subtle box shadow when hovered */
+  }
+
+.rightBox h3{
+  font-family: 'Open Sans', sans-serif;
+  
+  margin: 5%;
+ 
+}
+
 .description{
   height:20vh;
   background-color: #704251;
 }
+
+
 .centered-container {
   position: absolute;
   bottom: 0;
@@ -30,175 +65,124 @@
  
 }
 
-.addbutton{
-  height: auto;
-    width: 20%;
+.left-side {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 500px; /* Add a semicolon here */
+  height: 500px;
+
 }
-.addbutton:hover {
-    transform: scale(1.1); /* Increase the scale when hovered */
-    box-shadow: 0 0 0px rgba(0, 0, 0, 0.2); /* Add a subtle box shadow when hovered */
-  }
 
-  .logo{
-    height: auto;
-    width: 20%;
-  }
-
-  .leftBox{
-    margin-left: 12%;
-  }
+.image-container {
+  justify-content: space-evenly;
+  border: 2px solid #007bff; /* Add a border */
+  padding: 15px; /* Add padding to create space around the image */
+  width: 100%; /* Ensure the container takes full width */
+  height:100%;
   
-  .rightBox h3{
-    font-family: 'Open Sans', sans-serif;
-    
-    margin: 5%;
-   
-  }
+}
 
-  .font-link {
-    font-family: 'Hanalei Fill', cursive;
-  }
-.container-1{
-  min-height:100vh;
+.image-placeholder {
+  width: 100%; /* Match the width of the image container */
+  height: 400px; /* Set a fixed height or adjust as needed */
+  border: 2px dashed #ccc; /* Add a dashed border to indicate a placeholder */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 
-
-    
-    .response-container{
-     
-      background-color: #E4DCDE;
-      border: 1px solid #ccc;
-      padding: 20px; /* Increase padding if desired */
-    
-      width: 100%; /* Make sure the text area takes up the entire width of the box */
-      height: 100%; /* Make sure the text area takes up the entire height of the box */
-      display: flex; /* Use flex to control child elements */
-      flex-direction: column; /* Stack child elements vertically */
-     
-    }
-    .response-container h3{
-      text-align: center;
-    }
-
-    .response-textarea {
-      width: 100%; /* Make sure the text area takes up the entire width of the box */
-      height: 100%; /* Make sure the text area takes up the entire height of the box */
-      border: none; /* Remove the border of the text area */
-      resize: none; /* Disable text area resizing */
-      overflow: auto; /* Add scrollbars when content exceeds the box height */
-      border: 1px solid #ccc;
-      
-    }
-
-    .right-side {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 500px; /* Add a semicolon here */
-      height: 500px;
-    }
-    
-    .left-side {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 500px; /* Add a semicolon here */
-      height: 500px;
-   
-  }
-
-   
-      
-  
-  .image-container {
-    justify-content: space-evenly;
-    border: 2px solid #007bff; /* Add a border */
-    padding: 15px; /* Add padding to create space around the image */
-    width: 100%; /* Ensure the container takes full width */
-    height:100%;
-    
-  }
-  
-  .image-placeholder {
-    width: 100%; /* Match the width of the image container */
-    height: 400px; /* Set a fixed height or adjust as needed */
-    border: 2px dashed #ccc; /* Add a dashed border to indicate a placeholder */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .remove_upload{
-    display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
-    margin-top: 20px; /* Add margin as needed */
-  }
-  
 .image_preview_container{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
 
-  .image-preview {
-    max-width: 100%;
-    
-    
-  }
-  
-  .button {
-    background-color: #007bff;
-    color: #fff;
-    padding: 10px 20px;
-    margin: 10px;
-    border: none;
-    cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
+}
 
-  .button:hover {
-    transform: scale(1.01); /* Increase the scale when hovered */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Add a subtle box shadow when hovered */
-  }
+.image-preview {
+  max-width: 100%;  
+}
+
+.remove_upload{
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  margin-top: 20px; /* Add margin as needed */
+}
+
+.button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  margin: 10px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.button:hover {
+  transform: scale(1.01); /* Increase the scale when hovered */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Add a subtle box shadow when hovered */
+}
+
+
+
+
+.image_preview_container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.right-side {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 500px; /* Add a semicolon here */
+  height: 500px;
+}
+
+.response-container{
+     
+  background-color: #E4DCDE;
+  border: 1px solid #ccc;
+  padding: 20px; /* Increase padding if desired */
+
+  width: 100%; /* Make sure the text area takes up the entire width of the box */
+  height: 100%; /* Make sure the text area takes up the entire height of the box */
+  display: flex; /* Use flex to control child elements */
+  flex-direction: column; /* Stack child elements vertically */
+ 
+}
+.response-container h3{
+  text-align: center;
+}
+
+.response-textarea {
+  width: 100%; /* Make sure the text area takes up the entire width of the box */
+  height: 100%; /* Make sure the text area takes up the entire height of the box */
+  border: none; /* Remove the border of the text area */
+  resize: none; /* Disable text area resizing */
+  overflow: auto; /* Add scrollbars when content exceeds the box height */
+  border: 1px solid #ccc;
   
-  .error-message {
-    color: red;
-    font-size: 14px;
-    margin-top: 10px;
-  }
-  
-  .custom-file-upload {
-    background-color: #007bff; /* Change the background color to your preference */
-    color: #fff; /* Change the text color to your preference */
-    border: 1px solid #007bff; /* Add a border for styling */
-    padding: 10px 20px; /* Adjust padding as needed */
-    cursor: pointer; /* Change the cursor to a pointer on hover */
-    border-radius: 5px; /* Add border radius for rounded corners */
-  }
-  .footer {
-    padding: 20px; /* Adjust the padding as needed for the desired spacing */
+}
+
+.container-2 {
+  padding: 50px; /* Adjust the padding as needed for the desired spacing */
   margin: 0 auto; /* Center the container horizontally by setting margin-left and margin-right to "auto" */
   max-width: 1200px; /* Set a maximum width for the container */
-  }
-
-  .container-2 {
-   
-    padding: 50px; /* Adjust the padding as needed for the desired spacing */
-    margin: 0 auto; /* Center the container horizontally by setting margin-left and margin-right to "auto" */
-    max-width: 1200px; /* Set a maximum width for the container */
-}
-
-.container-3 {
-  background-color: #AF979E;
-  
 }
 
 
-.container-2{
-  margin: auto;
- 
+.CardGroup{
+  width: 400px; /* Set the desired width */
+  height: 300px; /* Set the desired height */
 }
 
 .card{
@@ -206,13 +190,31 @@
   height: 200px;
 }
 
-.CardGroup{
-  width: 400px; /* Set the desired width */
-  height: 300px; /* Set the desired height */
-}
+
 .card-body{
   background-color: #EAD7DE;
 }
 
-
+.container-3 {
+  background-color: #AF979E;
   
+}
+
+.footer {
+  padding: 20px; /* Adjust the padding as needed for the desired spacing */
+margin: 0 auto; /* Center the container horizontally by setting margin-left and margin-right to "auto" */
+max-width: 1200px; /* Set a maximum width for the container */
+}
+
+   
+  
+ 
+
+
+
+  .font-link {
+    font-family: 'Hanalei Fill', cursive;
+  }
+
+
+
