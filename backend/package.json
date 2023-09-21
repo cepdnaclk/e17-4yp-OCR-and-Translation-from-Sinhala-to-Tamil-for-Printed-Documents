@@ -4,7 +4,7 @@
   "description": "___\r # Optical Character Recognition & Translation from Sinhala to Tamil for Printed Documents\r ___",
   "main": "index.js",
   "scripts": {
-    "start":  "react-scripts start",
+    "start":  "node index.js",
     "test": "node index.js && node translate.js",
     "build":"react-scripts build && (cd../frontend && npm install)"
   },
