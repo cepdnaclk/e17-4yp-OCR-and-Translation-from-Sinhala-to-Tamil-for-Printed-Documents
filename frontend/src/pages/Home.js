@@ -22,6 +22,7 @@ const Home = () => {
   const handleRemoveImage = () => {
     setSelectedImage(null);
     setUploadError("");
+    setResponseText("");
   };
 
   const handleUpload = async () => {
@@ -67,11 +68,11 @@ const Home = () => {
 
   return (
 
-    <div>
+    <div className="page">
       <div className="container-1">
         <div className="header">
           <div className="leftBox">
-            <img className="logo" src="/Logo-1.png" alt="Logo"></img>
+            <img className="logo" src="/LogoLogo.png" alt="Logo"></img>
             <button
               className="addbutton"
               style={{ border: "none", background: "none" }}
@@ -87,6 +88,10 @@ const Home = () => {
               text
             </h3>
           </div>
+        </div>
+
+        <div className="description">
+          
         </div>
         <div className="centered-container">
           <div className="left-side">
@@ -106,7 +111,7 @@ const Home = () => {
                   />
                 </div>
               ) : (
-                <div className="image-placeholder">Drag and drop image</div>
+                <div className="image-placeholder">Drag and drop file</div>
               )}
 
               <div className="remove_upload">
