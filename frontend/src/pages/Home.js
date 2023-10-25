@@ -22,6 +22,7 @@ const Home = () => {
   const handleRemoveImage = () => {
     setSelectedImage(null);
     setUploadError("");
+    setResponseText("");
   };
 
   const handleUpload = async () => {
@@ -67,11 +68,11 @@ const Home = () => {
 
   return (
 
-    <div>
+    <div className="page">
       <div className="container-1">
         <div className="header">
           <div className="leftBox">
-            <img className="logo" src="/Logo-1.png" alt="Logo"></img>
+            <img className="logo" src="/logo.png" alt="Logo"></img>
             <button
               className="addbutton"
               style={{ border: "none", background: "none" }}
@@ -81,12 +82,16 @@ const Home = () => {
             </button>
           </div>
           <div className="rightBox">
-            <h3>
-              Our free online translator service allows you to quickly and
-              easily convert sinhala text,doc,img and pdf into editable tamil
-              text
-            </h3>
+            <h1>
+             ONLINE TRANSLATOR
+            </h1>
           </div>
+        </div>
+
+        <div className="description">
+          <h4>
+            Our free online translator service allows you toquickly and easily convert Sinhala to Tamil txt,docs,img and pdfs to an editable format
+          </h4>
         </div>
         <div className="centered-container">
           <div className="left-side">
@@ -106,7 +111,7 @@ const Home = () => {
                   />
                 </div>
               ) : (
-                <div className="image-placeholder">Drag and drop image</div>
+                <div className="image-placeholder">Drag and drop file</div>
               )}
 
               <div className="remove_upload">
@@ -154,7 +159,7 @@ const Home = () => {
           <Card className="card">
             <Card.Body className="card-body">
               <Card.Title>Use OCR</Card.Title>
-              <Card.Text>
+              <Card.Text className="cardText">
                 To extract Sinhala text and characters from printed documents.
               </Card.Text>
             </Card.Body>
@@ -165,7 +170,7 @@ const Home = () => {
           <Card className="card">
             <Card.Body className="card-body">
               <Card.Title>Translation </Card.Title>
-              <Card.Text>
+              <Card.Text className="cardText">
                 Translate the extracted Sinala text into Tamil editable text..{" "}
               </Card.Text>
             </Card.Body>
@@ -176,7 +181,7 @@ const Home = () => {
           <Card className="card">
             <Card.Body className="card-body">
               <Card.Title>Image,PDF,doc to editable text</Card.Title>
-              <Card.Text>
+              <Card.Text className="cardText">
                 Extract text from PDF,images,doc and text files without payment
               </Card.Text>
             </Card.Body>
@@ -187,7 +192,7 @@ const Home = () => {
           <Card className="card">
             <Card.Body className="card-body">
               <Card.Title>Free service </Card.Title>
-              <Card.Text>Accessible to anyone without registration</Card.Text>
+              <Card.Text className="cardText">Accessible to anyone without registration</Card.Text>
             </Card.Body>
             {/* <Card.Footer>
               <small className="text-muted">Last updated 3 mins ago</small>
@@ -198,32 +203,25 @@ const Home = () => {
       <div className="container-3">
         <footer className="footer">
           <div className="row">
-            <div className="col-md-6">
+            <div className="col">
               <h5>About Us</h5>
-              <p>This is and undergraduate project of University Of</p>
+              <p>This is and undergraduate project of University Of Peradeniya</p>
             </div>
-            <div className="col-md-6">
-              <h5>Contact Us</h5>
+           
+              
               <ul className="list-unstyled">
-                <li>
-                  <p>Mishel@gmail.com</p>
-                </li>
-                <li>
-                  <p>Odasara@gmail.com</p>
-                </li>
-                <li>
-                  <p>Shazna@gmail.com</p>
-                </li>
-                <li>
-                  <p>Lakindu@gmail.com</p>
-                </li>
+              <h5>Contact Us</h5>
+                
+                  <p>Mishel@gmail.com   ||  Odasara@gmail.com   ||  Shazna@gmail.com   ||  Lakindu@gmail.com</p>
+               
+              
                 {/* Add more navigation links as needed */}
               </ul>
-            </div>
+          
           </div>
           <hr />
           <div className="row">
-            <div className="col-md-12">
+            <div className="col">
               <p>
                 &copy; {new Date().getFullYear()} Tamil to Sinhala Online
                 Translator. All rights reserved.
