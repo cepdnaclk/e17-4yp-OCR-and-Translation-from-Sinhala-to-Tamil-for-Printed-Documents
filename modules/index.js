@@ -14,6 +14,7 @@ const {
   ocrImage,
 } = require('./pdfExtract');
 
+const { preprocessImage } = require('./preprocessing');
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, '../tmp/uploads_files'); // Change to your desired directory
@@ -89,6 +90,11 @@ app.post(
       } else if (mimeType.startsWith('image')) {
         // Handle image file processing here
         console.log("fileType = 'Image'");
+        //const preprocessedImagePath = await preprocessImage(uploadedFilePath);
+
+        // Extract text from the preprocessed image
+        //ocrText = await ocr_extract(preprocessedImagePath);
+
         ocrText = await ocr_extract(uploadedFilePath);
         translatedText = await translate_mod.translateText(ocrText);
         console.log(translatedText);
