@@ -15,33 +15,17 @@ async function preprocessImage(inputFilePath) {
       // Load the image using Jimp
       const image = await Jimp.read(inputFilePath);
 
-      // Resize the image to enlarge it
-      const enlargedWidth = image.bitmap.width * 20;
-      const enlargedHeight = image.bitmap.height * 20;
-      image.resize(enlargedWidth, enlargedHeight);
-
-      // Apply Gaussian smoothing for noise removal
-      image.gaussian(3); // You can adjust the standard deviation (3 in this example)
-
       // Convert the image to grayscale
       image.greyscale();
 
-      // Apply binarization with a threshold value
-      image.threshold({ max: 128 });
-
-      // Apply Canny edge detection
-      image.canny();
-
       // Save the preprocessed image
-      image
-        .writeAsync(outputFilePath)
-        .then(() => resolve(outputFilePath))
-        .catch((err) => {
-          console.error(err);
-          reject(err);
-        });
+      await image.writeAsync(outputFilePath);
+
+      // Resolve with the output file path
+      resolve(outputFilePath);
     } catch (error) {
-      console.error(error);
+      console.error('Error during image preprocessing:', error);
+      // Reject with the error object
       reject(error);
     }
   });
