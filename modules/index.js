@@ -90,12 +90,12 @@ app.post(
       } else if (mimeType.startsWith('image')) {
         // Handle image file processing here
         console.log("fileType = 'Image'");
-        //const preprocessedImagePath = await preprocessImage(uploadedFilePath);
+        const preprocessedImagePath = await preprocessImage(uploadedFilePath);
 
         // Extract text from the preprocessed image
-        //ocrText = await ocr_extract(preprocessedImagePath);
+        ocrText = await ocr_extract(preprocessedImagePath);
 
-        ocrText = await ocr_extract(uploadedFilePath);
+        //ocrText = await ocr_extract(uploadedFilePath);
         translatedText = await translate_mod.translateText(ocrText);
         console.log(translatedText);
       } else if (mimeType === 'application/pdf') {
