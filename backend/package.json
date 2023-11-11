@@ -1,7 +1,7 @@
 {
-  "name": "e17-4yp-ocr-and-translation-from-sinhala-to-tamil-for-printed-documents",
+  "name": "backend",
   "version": "1.0.0",
-  "description": "---",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
