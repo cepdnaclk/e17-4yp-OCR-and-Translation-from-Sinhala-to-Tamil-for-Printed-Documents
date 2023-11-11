@@ -13,7 +13,7 @@ const {
   findFilesInDirectory,
   ocrImage,
 } = require('./pdfExtract');
-
+const { postProcessSinhalaText } = require('./postprocessing');
 const { preprocessImage } = require('./preprocessing');
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -66,6 +66,7 @@ app.post(
       let uploadedText;
       let ocrText;
       let translatedText;
+      let postprocessing;
       let pdfImage = '../tmp/pdf_image/page-1.png';
       let pdfImagePath = '../tmp/pdf_image/';
 
@@ -96,8 +97,11 @@ app.post(
         //ocrText = await ocr_extract(preprocessedImagePath);
 
         ocrText = await ocr_extract(uploadedFilePath);
-        translatedText = await translate_mod.translateText(ocrText);
-        console.log(translatedText);
+        postprocessing = await postProcessSinhalaText(
+          '../tmp/ocr_results/ocr.txt'
+        );
+        translatedText = await translate_mod.translateText(postprocessing);
+        //console.log(translatedText);
       } else if (mimeType === 'application/pdf') {
         // Handle PDF file processing here
         console.log("fileType = 'PDF'");
