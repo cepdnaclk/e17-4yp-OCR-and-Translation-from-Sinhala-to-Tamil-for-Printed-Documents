@@ -1,7 +1,6 @@
-@import "~bootstrap/scss/bootstrap";
+@import '~bootstrap/scss/bootstrap';
 
 .page {
-
 }
 
 .container-1 {
@@ -9,16 +8,21 @@
 }
 
 .header {
- 
-  background-color: #BAB8BB;
+  background-color: rgb(6, 74, 101);
   display: flex;
-  justify-content: center;
+  flex-direction: column; /* Stack the children vertically */
   align-items: center;
- 
+  padding: 10px; /* Add padding for spacing */
+}
+
+.logo-row,
+.text-row {
+  display: flex;
+  align-items: center;
 }
 
 .leftBox {
-  height: 13vh;
+  height: 20vh;
   margin-left: 10%;
   display: flex;
   justify-content: left;
@@ -26,14 +30,12 @@
 }
 
 .logo {
-  height: auto;
-  width: 15%;
+  height: 50px;
+  margin-bottom: 10px;
 }
 
 .addbutton {
   height: auto;
- 
- 
 }
 
 .addbutton:hover {
@@ -41,27 +43,26 @@
   box-shadow: 0 0 0px rgba(0, 0, 0, 0.2); /* Add a subtle box shadow when hovered */
 }
 
-.rightBox{
-  margin-right: 10%;
-
+.rightBox {
+  padding: 10px 0;
 }
 
-.rightBox h1 {
-  font-family: "Open Sans", sans-serif;
+.text-row h1 {
+  font-family: 'Lato', sans-serif; /* Change the font to Lato */
+  color: white; /* Set the text color to white */
 
+  font-size: 2rem; /* Adjust the font size as needed */
 }
 
 .description {
-  height: 10vh;
-  background-color: #CDCACE;
+  height: 8vh;
+  background-color: #cdcace;
   display: flex;
   justify-content: center;
   align-items: center;
-  
 }
 
 .centered-container {
- 
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -144,7 +145,7 @@
 }
 
 .response-container {
-  background-color: #DAD7DA;
+  background-color: #dad7da;
   border: 0.4vh solid #007bff;
   padding: 1vw; /* Increase padding if desired */
 
@@ -154,7 +155,7 @@
   flex-direction: column; /* Stack child elements vertically */
 }
 .response-container h3 {
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   text-align: center;
 }
 
@@ -164,45 +165,59 @@
   border: none; /* Remove the border of the text area */
   resize: none; /* Disable text area resizing */
   overflow: auto; /* Add scrollbars when content exceeds the box height */
- 
 }
 
 .container-2 {
   background-color: #fbfbfb;
   padding: 5vh; /* Adjust the padding as needed for the desired spacing */
   margin: 0 auto; /* Center the container horizontally by setting margin-left and margin-right to "auto" */
-  
+}
+.uses-heading {
+  color: rgb(6, 74, 101);
+  padding: 10px 0 30px 0; /* top right bottom left */
+  text-align: center;
 }
 
-.CardGroup {
+.cards-container {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
   align-items: center;
-  width: 80vw; /* Set the desired width */
-  height: 7vh; /* Set the desired height */
- 
+  height: 30vh; /* Set the desired height */
 }
 
 .card {
-  
-  border: 0.2vw solid #BAB8BB;
-  height: 25vh;
-  width: 15vw;
+  border: 0.2vw solid rgb(6, 74, 101); /* Set the border color to match the header */
+  height: 30vh;
+  width: 30vw;
+  margin: 1vw; /* Add margin to separate the cards */
+  box-sizing: border-box;
+  border-radius: 2vw; /* Set the border radius to create rounded corners */
+  overflow: hidden; /* Ensure that the border is visible around rounded corners */
 }
 
 .card-body {
   display: flex;
   justify-content: left;
   align-items: center;
-  background-color: #F8F7F9;
+  background-color: #f8f7f9;
   flex-direction: column;
 }
 
 .container-3 {
-  background-color: #9A989B;
+  background-color: #9a989b;
 }
-.cardText{
+.cardTitle {
+  display: flex;
+  align-items: center; /* Align items vertically in the center */
+  margin-bottom: 10px; /* Add margin at the bottom */
+}
+
+.cardTitle .icon {
+  margin-right: 10px; /* Add margin to the right of the icon */
+}
+.cardText {
   font-size: 1vw;
+  text-align: justify;
 }
 
 .footer {
@@ -212,21 +227,21 @@
   flex-direction: column;
 }
 
-.row{
+.row {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
   flex-direction: column;
 }
 
-.col{
+.col {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
   flex-direction: column;
 }
 
-.list-unstyled{
+.list-unstyled {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -234,6 +249,5 @@
 }
 
 .font-link {
-  font-family: "Hanalei Fill", cursive;
+  font-family: 'Hanalei Fill', cursive;
 }
-

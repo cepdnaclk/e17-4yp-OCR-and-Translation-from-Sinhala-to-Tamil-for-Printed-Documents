@@ -1,57 +1,65 @@
-import React, { useState, useRef } from "react";
-import axios from "axios";
-import "./Home.scss"; // Import the CSS file
-import CircumIcon from "@klarr-agency/circum-icons-react";
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
-import Card from "react-bootstrap/Card";
-import CardGroup from "react-bootstrap/CardGroup";
+import React, { useState, useRef } from 'react';
+import axios from 'axios';
+import './Home.scss'; // Import the CSS file
+import CircumIcon from '@klarr-agency/circum-icons-react';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+import Card from 'react-bootstrap/Card';
+import CardGroup from 'react-bootstrap/CardGroup';
+import logo from '../Images/Logo.png';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faLanguage,
+  faFileAlt,
+  faImages,
+  faMoneyBill,
+} from '@fortawesome/free-solid-svg-icons';
 
 const Home = () => {
   const [selectedImage, setSelectedImage] = useState(null);
-  const [uploadError, setUploadError] = useState("");
-  const [responseText, setResponseText] = useState("");
+  const [uploadError, setUploadError] = useState('');
+  const [responseText, setResponseText] = useState('');
   const fileInputRef = useRef(null);
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     setSelectedImage(file);
-    setUploadError("");
+    setUploadError('');
   };
 
   const handleRemoveImage = () => {
     setSelectedImage(null);
-    setUploadError("");
-    setResponseText("");
+    setUploadError('');
+    setResponseText('');
   };
 
   const handleUpload = async () => {
     if (!selectedImage) {
-      setUploadError("Please select an image to upload.");
+      setUploadError('Please select an image to upload.');
       return;
     }
 
     const formData = new FormData();
-    formData.append("uploadedFile", selectedImage);
+    formData.append('uploadedFile', selectedImage);
 
     try {
       const response = await axios.post(
-        "http://localhost:4000/api/upload_file",
+        'http://localhost:4000/api/upload_file',
         formData,
         {
           headers: {
-            "Content-Type": "multipart/form-data",
+            'Content-Type': 'multipart/form-data',
           },
         }
       );
 
-      console.log("Image upload response:", response.data);
-      setUploadError("");
+      console.log('Image upload response:', response.data);
+      setUploadError('');
       setResponseText(JSON.stringify(response.data, null, 2));
-      setUploadError(""); // Clear any previous upload errors
+      setUploadError(''); // Clear any previous upload errors
     } catch (error) {
-      console.error("Error uploading image:", error);
-      setUploadError("Error uploading image. Please try again later.");
+      console.error('Error uploading image:', error);
+      setUploadError('Error uploading image. Please try again later.');
     }
   };
 
@@ -63,35 +71,26 @@ const Home = () => {
     e.preventDefault();
     const file = e.dataTransfer.files[0];
     setSelectedImage(file);
-    setUploadError("");
+    setUploadError('');
   };
 
   return (
-
     <div className="page">
       <div className="container-1">
         <div className="header">
-          <div className="leftBox">
-            <img className="logo" src="/logo.png" alt="Logo"></img>
-            <button
-              className="addbutton"
-              style={{ border: "none", background: "none" }}
-              onClick={() => fileInputRef.current.click()}
-            >
-              <CircumIcon name="circle_plus" color="#000" size="100px" />
-            </button>
+          <div className="logo-row">
+            <img className="logo" src={logo} alt="Logo" />
           </div>
-          <div className="rightBox">
-            <h1>
-             ONLINE TRANSLATOR
-            </h1>
+          <div className="text-row">
+            <h1>SINHALA TAMIL ONLINE TRANSLATOR</h1>
           </div>
         </div>
 
         <div className="description">
-          <h4>
-            Our free online translator service allows you toquickly and easily convert Sinhala to Tamil txt,docs,img and pdfs to an editable format
-          </h4>
+          <h6>
+            Effortlessly translate Sinhala to Tamil, converting text, documents,
+            images, and PDFs into an editable format—all for free.
+          </h6>
         </div>
         <div className="centered-container">
           <div className="left-side">
@@ -155,12 +154,22 @@ const Home = () => {
         </div>
       </div>
       <div className="container-2">
-        <CardGroup>
+        <div className="uses-heading">
+          <h2>Explore Features of Sinhala Tamil Online Translator</h2>
+        </div>
+        <div className="cards-container">
           <Card className="card">
             <Card.Body className="card-body">
-              <Card.Title>Use OCR</Card.Title>
+              <Card.Title className="cardTitle">
+                <div className="icon">
+                  <FontAwesomeIcon icon={faFileAlt} />
+                </div>
+                OCR Text Extraction
+              </Card.Title>
               <Card.Text className="cardText">
-                To extract Sinhala text and characters from printed documents.
+                Use Optical Character Recognition (OCR) technology to
+                effortlessly extract Sinhala text and characters from printed
+                documents.
               </Card.Text>
             </Card.Body>
             {/* <Card.Footer>
@@ -169,9 +178,16 @@ const Home = () => {
           </Card>
           <Card className="card">
             <Card.Body className="card-body">
-              <Card.Title>Translation </Card.Title>
+              <Card.Title className="cardTitle">
+                <div className="icon">
+                  <FontAwesomeIcon icon={faLanguage} />
+                </div>
+                Sinhala to Tamil Translation
+              </Card.Title>
               <Card.Text className="cardText">
-                Translate the extracted Sinala text into Tamil editable text..{" "}
+                Effortlessly translate Sinhala to Tamil with our user-friendly
+                tool. Enjoy accurate and efficient language conversion, making
+                communication across these languages simple and accessible.
               </Card.Text>
             </Card.Body>
             {/* <Card.Footer>
@@ -180,9 +196,17 @@ const Home = () => {
           </Card>
           <Card className="card">
             <Card.Body className="card-body">
-              <Card.Title>Image,PDF,doc to editable text</Card.Title>
+              <Card.Title className="cardTitle">
+                <div className="icon">
+                  <FontAwesomeIcon icon={faImages} />
+                </div>
+                Format Versatility
+              </Card.Title>
               <Card.Text className="cardText">
-                Extract text from PDF,images,doc and text files without payment
+                Enjoy flexibility in translation with support for various
+                formats.Plain text, documents (including .txt, .md, .log, .doc,
+                .docx), images (including .tif, .tiff, .jpg, .jpeg, .png), or
+                PDFs (scanned or searchable, single or multi-pages)
               </Card.Text>
             </Card.Body>
             {/* <Card.Footer>
@@ -191,33 +215,44 @@ const Home = () => {
           </Card>
           <Card className="card">
             <Card.Body className="card-body">
-              <Card.Title>Free service </Card.Title>
-              <Card.Text className="cardText">Accessible to anyone without registration</Card.Text>
+              <Card.Title className="cardTitle">
+                <div className="icon">
+                  <FontAwesomeIcon icon={faMoneyBill} />
+                </div>
+                Free Translation Services
+              </Card.Title>
+              <Card.Text className="cardText">
+                Experience cost-free language translation services, breaking
+                down barriers and making language transformation accessible to
+                all without any financial constraints.
+              </Card.Text>
             </Card.Body>
             {/* <Card.Footer>
               <small className="text-muted">Last updated 3 mins ago</small>
             </Card.Footer> */}
           </Card>
-        </CardGroup>
+        </div>
       </div>
       <div className="container-3">
         <footer className="footer">
           <div className="row">
             <div className="col">
               <h5>About Us</h5>
-              <p>This is and undergraduate project of University Of Peradeniya</p>
+              <p>
+                This is and undergraduate project of University Of Peradeniya
+              </p>
             </div>
-           
-              
-              <ul className="list-unstyled">
+
+            <ul className="list-unstyled">
               <h5>Contact Us</h5>
-                
-                  <p>Mishel@gmail.com   ||  Odasara@gmail.com   ||  Shazna@gmail.com   ||  Lakindu@gmail.com</p>
-               
-              
-                {/* Add more navigation links as needed */}
-              </ul>
-          
+
+              <p>
+                Mishel@gmail.com || Odasara@gmail.com || Shazna@gmail.com ||
+                Lakindu@gmail.com
+              </p>
+
+              {/* Add more navigation links as needed */}
+            </ul>
           </div>
           <hr />
           <div className="row">
