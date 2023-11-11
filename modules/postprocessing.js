@@ -1,16 +1,13 @@
 const fs = require('fs-extra');
 
-async function postProcessSinhalaText(inputFilePath) {
+async function postProcessSinhalaText(ocrText) {
   try {
-    // Read the content of the input file asynchronously
-    const inputText = await fs.readFile(inputFilePath, 'utf-8');
+    // Remove unnecessary characters (keeping only Sinhala letters, numbers, spaces, and selected punctuation)
+    const filteredText = ocrText.replace(/[^\u0D80-\u0DFF0-9\s()!.,;"]/g, '');
 
     // Create the output directory if it doesn't exist
     const outputDirectory = '../tmp/postprocessing/';
     await fs.ensureDir(outputDirectory);
-
-    // Remove unnecessary characters (keeping only Sinhala letters, numbers, spaces, and selected punctuation)
-    const filteredText = inputText.replace(/[^\u0D80-\u0DFF0-9\s()!.,;"]/g, '');
 
     // Create a file to store the filtered text
     const outputTextFilePath = outputDirectory + 'filtered_text.txt';

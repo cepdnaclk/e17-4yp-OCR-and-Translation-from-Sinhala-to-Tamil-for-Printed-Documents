@@ -17,7 +17,14 @@ const { postProcessSinhalaText } = require('./postprocessing');
 const { preprocessImage } = require('./preprocessing');
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, '../tmp/uploads_files'); // Change to your desired directory
+    const uploadsDir = path.join(__dirname, '../tmp/uploads_files');
+
+    // Create the uploads_files directory if it doesn't exist
+    if (!fs.existsSync(uploadsDir)) {
+      fs.mkdirSync(uploadsDir, { recursive: true });
+    }
+
+    cb(null, uploadsDir); // Use the uploads_files directory
   },
   filename: (req, file, cb) => {
     cb(null, file.originalname);
@@ -97,30 +104,21 @@ app.post(
         //ocrText = await ocr_extract(preprocessedImagePath);
 
         ocrText = await ocr_extract(uploadedFilePath);
-        postprocessing = await postProcessSinhalaText(
-          '../tmp/ocr_results/ocr.txt'
-        );
+        postprocessing = await postProcessSinhalaText(ocrText);
         translatedText = await translate_mod.translateText(postprocessing);
-        //console.log(translatedText);
       } else if (mimeType === 'application/pdf') {
         // Handle PDF file processing here
         console.log("fileType = 'PDF'");
         await convertPdfToImage(uploadedFilePath);
-        const ocrText = await getAllTextFromImages(
-          '../tmp/pdf_image/',
-          '../tmp/pdf_text/pdf_text.txt'
-        );
-        console.log(ocrText);
-        translatedText = await translate_mod.translateText(ocrText);
+        const Text = await getAllTextFromImages('../tmp/pdf_image/');
+        //console.log(ocrText);
+        translatedText = await translate_mod.translateText(Text);
         console.log(translatedText);
       } else {
         // Handle other or unknown file types here
         console.log("fileType = 'Unknown'");
       }
-
-      //const uploadedText = fs.readFileSync(uploadedFilePath, 'utf-8');
-      // Perform translation on the uploaded text
-      //const translatedText = await translate_mod.translateText(uploadedText);
+      fs.unlinkSync(uploadedFilePath);
 
       return res.json({
         message: translatedText,
