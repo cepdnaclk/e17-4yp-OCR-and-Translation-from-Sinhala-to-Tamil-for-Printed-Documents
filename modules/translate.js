@@ -20,8 +20,14 @@ async function translateText(srcText) {
     // Combine the translations into a single text
     const translatedText = translations.join('');
 
+    // Define the output directory and translation file path
+    const outputDirectory = '../tmp/translations/';
+    const translationFilePath = outputDirectory + 'translation.txt';
+
+    // Ensure the output directory exists
+    await fs.ensureDir(outputDirectory);
+
     // Write the translation to a file
-    const translationFilePath = '../tmp/translations/translation.txt';
     fs.writeFileSync(translationFilePath, translatedText, {
       encoding: 'utf8',
       flag: 'w',

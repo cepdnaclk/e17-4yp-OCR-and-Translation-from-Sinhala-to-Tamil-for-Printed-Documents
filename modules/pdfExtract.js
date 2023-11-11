@@ -3,6 +3,9 @@ const fs = require('fs').promises; // Import fs.promises to use asynchronous fun
 const tesseract = require('tesseract.js');
 const { spawn } = require('child_process');
 const path = require('path');
+const fse = require('fs-extra');
+const { postProcessSinhalaText } = require('./postprocessing');
+const { preprocessImage } = require('./preprocessing');
 const { ocr_extract } = require('./ocr'); // Import the ocr_extract function from the ocr.js file
 async function convertPdfToImage(pdfPath) {
   const outputPath = '../tmp/pdf_image/';
@@ -39,21 +42,28 @@ async function findFilesInDirectory(directoryPath) {
   }
 }
 
-async function getAllTextFromImages(directoryPath, outputFilePath) {
-  const files = await findFilesInDirectory(directoryPath);
+async function getAllTextFromImages(directoryImagePath) {
+  const outputFilePath = '../tmp/pdf_text/';
+  await fse.ensureDir(outputFilePath);
+  const files = await findFilesInDirectory(directoryImagePath);
   const combinedText = [];
 
   for (const file of files) {
-    const imagePath = `${directoryPath}/${file}`;
+    const imagePath = `${directoryImagePath}/${file}`;
     console.log(`Processing image: ${imagePath}`);
 
     try {
-      const ocrResult = await ocr_extract(imagePath);
-      combinedText.push(ocrResult);
+      const preProcessPath = await preprocessImage(imagePath);
+      const ocrResult = await ocr_extract(preProcessPath);
+      const postPressText = await postProcessSinhalaText(ocrResult);
+      combinedText.push(postPressText);
 
       // Delete the processed image file
       await fs.unlink(imagePath);
       console.log(`Deleted image: ${imagePath}`);
+      // Delete the preprocessed image file
+      await fs.unlink(preProcessPath);
+      console.log(`Deleted preprocessed image: ${preProcessPath}`);
     } catch (error) {
       console.error(`Error processing image ${imagePath}:`, error);
     }
@@ -64,7 +74,9 @@ async function getAllTextFromImages(directoryPath, outputFilePath) {
 
   try {
     // Write the combined text to the output file
-    await fs.writeFile(outputFilePath, finalText, 'utf8');
+    // Create a file to store the filtered text
+    const outputTextFilePath = outputFilePath + 'pdf_text.txt';
+    await fs.writeFile(outputTextFilePath, finalText, 'utf8');
     console.log(`Combined OCR results written to ${outputFilePath}`);
   } catch (error) {
     console.error('Error writing OCR results to file:', error);

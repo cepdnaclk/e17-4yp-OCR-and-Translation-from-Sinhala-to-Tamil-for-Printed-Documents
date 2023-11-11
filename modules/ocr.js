@@ -6,6 +6,10 @@ const languages = ['eng', 'sin', 'tam'];
 async function ocr_extract(srcfile) {
   return new Promise(async (resolve, reject) => {
     try {
+      // Ensure the directory exists
+      const outputDirectory = '../tmp/ocr_results/';
+      await fs.ensureDir(outputDirectory);
+
       const worker = await createWorker({ logger: () => {} });
 
       await worker.loadLanguage(languages.join('+'));
@@ -14,23 +18,17 @@ async function ocr_extract(srcfile) {
         tessedit_ocr_engine_mode: 2,
         tessedit_pageseg_mode: 6,
       });
-      await worker
-        .recognize(
-          // 'tmp/preprocess_results/'+srcfile.file.filename,
-          srcfile
-        )
-        .then(({ data: { text } }) => {
-          try {
-            fs.writeFileSync('../tmp/ocr_results/' + 'ocr' + '.txt', text, {
-              flag: 'w',
-            });
-            //    fs.writeFileSync('tmp/ocr_results/'+srcfile.file.filename.split(".")[0]+".txt",text,{flag:'w'});
-            //    translate_mod.translateText(srcfile.file.filename.split(".")[0]+".txt")
-          } catch (error) {
-            console.log(error);
-          }
-          resolve(text);
-        });
+      await worker.recognize(srcfile).then(({ data: { text } }) => {
+        try {
+          // Save the OCR results
+          fs.writeFileSync(outputDirectory + 'ocr.txt', text, {
+            flag: 'w',
+          });
+        } catch (error) {
+          console.log(error);
+        }
+        resolve(text);
+      });
       await worker.terminate();
     } catch (error) {
       console.error(error);

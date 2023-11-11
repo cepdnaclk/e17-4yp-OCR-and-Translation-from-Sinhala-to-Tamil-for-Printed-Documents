@@ -5,8 +5,7 @@ const translate_mod = require('./translate'); // Your translation module
 const fs = require('fs'); // Required for file operations
 const path = require('path'); // Import the path module
 const textract = require('textract'); // Import the textract library
-const cors = require("cors");
-
+const cors = require('cors');
 const mammoth = require('mammoth'); // For extracting text from .doc/.docx files
 const { ocr_extract } = require('./ocr');
 const {
@@ -15,23 +14,24 @@ const {
   findFilesInDirectory,
   ocrImage,
 } = require('./pdfExtract');
-
+const { postProcessSinhalaText } = require('./postprocessing');
+const { preprocessImage } = require('./preprocessing');
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, '../tmp/uploads_files'); // Change to your desired directory
+    const uploadsDir = path.join(__dirname, '../tmp/uploads_files');
+    // Create the uploads_files directory if it doesn't exist
+    if (!fs.existsSync(uploadsDir)) {
+      fs.mkdirSync(uploadsDir, { recursive: true });
+    }
+    cb(null, uploadsDir); // Use the uploads_files directory
   },
   filename: (req, file, cb) => {
     cb(null, file.originalname);
   },
 });
-
 const upload = multer({ storage: storage });
-
 app.use(cors());
-
-
 app.use(express.static('public'));
-
 app.get('/', (req, res) => {
   const frontendHTML = fs.readFileSync(
     path.join(__dirname, 'frontend.html'),
@@ -39,7 +39,6 @@ app.get('/', (req, res) => {
   );
   res.send(frontendHTML);
 });
-
 async function extractTextFromDoc(docFilePath) {
   console.log('Came to extract function');
   return new Promise((resolve, reject) => {
@@ -94,28 +93,27 @@ app.post(
       } else if (mimeType.startsWith('image')) {
         // Handle image file processing here
         console.log("fileType = 'Image'");
+        //const preprocessedImagePath = await preprocessImage(uploadedFilePath);
+
+        // Extract text from the preprocessed image
+        //ocrText = await ocr_extract(preprocessedImagePath);
+
         ocrText = await ocr_extract(uploadedFilePath);
-        translatedText = await translate_mod.translateText(ocrText);
-        console.log(translatedText);
+        postprocessing = await postProcessSinhalaText(ocrText);
+        translatedText = await translate_mod.translateText(postprocessing);
       } else if (mimeType === 'application/pdf') {
         // Handle PDF file processing here
         console.log("fileType = 'PDF'");
         await convertPdfToImage(uploadedFilePath);
-        const ocrText = await getAllTextFromImages(
-          '../tmp/pdf_image/',
-          '../tmp/pdf_text/pdf_text.txt'
-        );
-        console.log(ocrText);
-        translatedText = await translate_mod.translateText(ocrText);
+        const Text = await getAllTextFromImages('../tmp/pdf_image/');
+        //console.log(ocrText);
+        translatedText = await translate_mod.translateText(Text);
         console.log(translatedText);
       } else {
         // Handle other or unknown file types here
         console.log("fileType = 'Unknown'");
       }
-
-      //const uploadedText = fs.readFileSync(uploadedFilePath, 'utf-8');
-      // Perform translation on the uploaded text
-      //const translatedText = await translate_mod.translateText(uploadedText);
+      fs.unlinkSync(uploadedFilePath);
 
       return res.json({
         message: translatedText,
@@ -141,7 +139,6 @@ function extractTextFromDoc(docFilePath) {
     });
   });
 }
-
 
 app.listen(4000, () => {
   console.log(
