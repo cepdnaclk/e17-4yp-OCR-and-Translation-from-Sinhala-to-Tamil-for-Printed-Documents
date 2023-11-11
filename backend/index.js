@@ -142,9 +142,14 @@ function extractTextFromDoc(docFilePath) {
   });
 }
 
-
-app.listen(4000, () => {
-  console.log(
-    'Server is running on port 4000 for file uploads and translation'
-  );
+const server = app.listen(4000, '0.0.0.0', () => {
+  console.log('Server is running on port 4000 for file uploads and translation');
 });
+
+
+// app.listen(4000, () => {
+//   console.log(
+//     'Server is running on port 4000 for file uploads and translation'
+//   );
+// }
+// );
