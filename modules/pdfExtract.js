@@ -53,9 +53,10 @@ async function getAllTextFromImages(directoryImagePath) {
     console.log(`Processing image: ${imagePath}`);
 
     try {
-      const preProcessPath = await preprocessImage(imagePath);
-      const ocrResult = await ocr_extract(preProcessPath);
-      const postPressText = await postProcessSinhalaText(ocrResult);
+      //const preProcessPath = await preprocessImage(imagePath);
+      //const ocrResult = await ocr_extract(preProcessPath);
+      //const postPressText = await postProcessSinhalaText(ocrResult);
+      const ocrResult = await ocr_extract(magePath);
       combinedText.push(postPressText);
 
       // Delete the processed image file

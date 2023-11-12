@@ -99,8 +99,9 @@ app.post(
         //ocrText = await ocr_extract(preprocessedImagePath);
 
         ocrText = await ocr_extract(uploadedFilePath);
-        postprocessing = await postProcessSinhalaText(ocrText);
-        translatedText = await translate_mod.translateText(postprocessing);
+        //postprocessing = await postProcessSinhalaText(ocrText);
+        //translatedText = await translate_mod.translateText(postprocessing);
+        translatedText = await translate_mod.translateText(ocrText);
       } else if (mimeType === 'application/pdf') {
         // Handle PDF file processing here
         console.log("fileType = 'PDF'");
@@ -108,12 +109,11 @@ app.post(
         const Text = await getAllTextFromImages('../tmp/pdf_image/');
         //console.log(ocrText);
         translatedText = await translate_mod.translateText(Text);
-        console.log(translatedText);
+        //console.log(translatedText);
       } else {
         // Handle other or unknown file types here
         console.log("fileType = 'Unknown'");
       }
-      fs.unlinkSync(uploadedFilePath);
 
       return res.json({
         message: translatedText,
@@ -124,6 +124,7 @@ app.post(
         error: 'An error occurred',
       });
     }
+    
   }
 );
 
