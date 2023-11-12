@@ -13,6 +13,8 @@ import {
   faFileAlt,
   faImages,
   faMoneyBill,
+  faEnvelope,
+  faGlobe,
 } from '@fortawesome/free-solid-svg-icons';
 
 const Home = () => {
@@ -236,31 +238,85 @@ const Home = () => {
       <div className="container-3">
         <footer className="footer">
           <div className="row">
-            <div className="col">
-              <h5>About Us</h5>
-              <p>
-                This is and undergraduate project of University Of Peradeniya
-              </p>
+            <div className="column">
+              <h4>About Us</h4>
+              <div className="about-container">
+                <p className="about-text">
+                  Welcome to Tamil to Sinhala Online Translator, an innovative
+                  project developed by final year students from the University
+                  of Peradeniya. We are committed to delivering high-quality
+                  language translation services.
+                </p>
+              </div>
             </div>
+            <div className="column">
+              <h4>Contact Us</h4>
 
-            <ul className="list-unstyled">
-              <h5>Contact Us</h5>
-
-              <p>
-                Mishel@gmail.com || Odasara@gmail.com || Shazna@gmail.com ||
-                Lakindu@gmail.com
-              </p>
-
-              {/* Add more navigation links as needed */}
-            </ul>
+              <div className="contact-section">
+                <p>
+                  Email:{' '}
+                  <ul>
+                    <li>
+                      <FontAwesomeIcon icon={faEnvelope} />{' '}
+                      <a href="mailto:info@translator.com">
+                        info@translator.com
+                      </a>
+                    </li>
+                  </ul>
+                </p>
+                <p>
+                  Website:{' '}
+                  <ul>
+                    <li>
+                      <FontAwesomeIcon icon={faGlobe} />{' '}
+                      <a href="https://cepdnaclk.github.io/e17-4yp-OCR-and-Translation-from-Sinhala-to-Tamil-for-Printed-Documents/">
+                        Official Website
+                      </a>
+                    </li>
+                  </ul>
+                </p>
+              </div>
+              <div className="contact-section">
+                <p>
+                  Additional Contacts:
+                  <ul>
+                    <li>
+                      <FontAwesomeIcon icon={faEnvelope} />{' '}
+                      <a href="mailto:mishelrossmaree@gmail.com">
+                        mishelrossmaree@gmail.com
+                      </a>
+                    </li>
+                    <li>
+                      <FontAwesomeIcon icon={faEnvelope} />{' '}
+                      <a href="mailto:odasaraik@gmail.com">
+                        odasaraik@gmail.com
+                      </a>
+                    </li>
+                    <li>
+                      <FontAwesomeIcon icon={faEnvelope} />{' '}
+                      <a href="mailto:shaznaisthikar@gmail.com">
+                        shaznaisthikar@gmail.com
+                      </a>
+                    </li>
+                    <li>
+                      <FontAwesomeIcon icon={faEnvelope} />{' '}
+                      <a href="mailto:lakinduat@gmail.com">lakindu@gmail.com</a>
+                    </li>
+                  </ul>
+                </p>
+              </div>
+            </div>
           </div>
           <hr />
           <div className="row">
             <div className="col">
-              <p>
-                &copy; {new Date().getFullYear()} Tamil to Sinhala Online
-                Translator. All rights reserved.
-              </p>
+              <div className="copyright">
+                <p>
+                  &copy; {new Date().getFullYear()} Tamil to Sinhala Online
+                  Translator. All rights reserved. | Terms of Service | Privacy
+                  Policy
+                </p>
+              </div>
             </div>
           </div>
         </footer>
