@@ -46,7 +46,7 @@ const Home = () => {
 
     try {
       const response = await axios.post(
-        'http://localhost:4000/api/upload_file',
+        "http://13.126.178.225:4000/api/upload_file",
         formData,
         {
           headers: {
