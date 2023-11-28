@@ -54,4 +54,5 @@ This tool may lead to further growth in future such as bringing out more reliabi
 - [Project Page](https://cepdnaclk.github.io/e17-4yp-OCR-and-Translation-from-Sinhala-to-Tamil-for-Printed-Documents/)
 - [Department of Computer Engineering](http://www.ce.pdn.ac.lk/)
 - [University of Peradeniya](https://eng.pdn.ac.lk/)
+- [Download the Research Paper]()
 
