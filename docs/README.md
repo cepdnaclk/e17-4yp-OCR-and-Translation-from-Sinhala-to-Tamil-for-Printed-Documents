@@ -51,7 +51,7 @@ The main objective of this research is to develop a web application system that 
 
 The Tesseract OCR extracts the text from the preprocessed images. For text cleaning, we utilized a postprocessing module that eliminates excess spaces, special characters, and other unneeded characters from the text. The Sinhala text is then translated into Tamil using Google Translate, a free Google API that provides highly accurate translations. The web portal displays the final output of the Tamil translation and the intermediate Sinhala OCR.
 
-![Sample Image](./images/sample.png)
+![Sample Image](./images/methodology.png)
 
 ## Experiment Setup and Implementation
 
