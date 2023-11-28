@@ -25,13 +25,12 @@ title: OCR and Translation from Sinhala to Tamil for Printed Documents
 #### Table of content
 
 1. [Abstract](#abstract)
-2. [Related works](#related-works)
-3. [Methodology](#methodology)
-4. [Experiment Setup and Implementation](#experiment-setup-and-implementation)
-5. [Results and Analysis](#results-and-analysis)
-6. [Conclusion](#conclusion)
-7. [Publications](#publications)
-8. [Links](#links)
+2. [Methodology](#methodology)
+3. [Experiment Setup and Implementation](#experiment-setup-and-implementation)
+4. [Results and Analysis](#results-and-analysis)
+5. [Conclusion](#conclusion)
+6. [Publications](#publications)
+7. [Links](#links)
 
 ---
 
@@ -75,6 +74,7 @@ This tool may lead to further growth in future such as bringing out more reliabi
 - [Project Page](https://cepdnaclk.github.io/e17-4yp-OCR-and-Translation-from-Sinhala-to-Tamil-for-Printed-Documents/)
 - [Department of Computer Engineering](http://www.ce.pdn.ac.lk/)
 - [University of Peradeniya](https://eng.pdn.ac.lk/)
+- [Download the Research Paper]()
 
 [//]: # 'Please refer this to learn more about Markdown syntax'
 [//]: # 'https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet'
