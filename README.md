@@ -17,17 +17,20 @@
 #### Table of content
 
 1. [Abstract](#abstract)
-2. [Methodology](#methodology)
-3. [Experiment Setup and Implementation](#experiment-setup-and-implementation)
-4. [Results and Analysis](#results-and-analysis)
-5. [Conclusion](#conclusion)
-6. [Publications](#publications)
-7. [Links](#links)
+2. [Related works](#related-works)
+3. [Methodology](#methodology)
+4. [Experiment Setup and Implementation](#experiment-setup-and-implementation)
+5. [Results and Analysis](#results-and-analysis)
+6. [Conclusion](#conclusion)
+7. [Publications](#publications)
+8. [Links](#links)
 
 ## Abstract
 Sinhala and Tamil are the official national languages of Sri Lanka. But most people only speak or read one of them, making a language barrier. This research aims to create an accessible tool to translate Sinhala documents into Tamil language. Optical Character Recognition (OCR) with the underlying technology of Tesseract is used to identify the characters from documents and using Google Translation API, translation is done. Pre-processing and post-processing techniques are used to improve the accuracy of the system.
 
 ## Related works
+The area of Sinhala OCR and Sinhala to Tamil translation using different approaches has been touched on earlier by some significant research. However, there is a gap between existing research as there is no proper tool to do the document translations. Find the existing work [here]()
+
 
 ## Methodology
 
