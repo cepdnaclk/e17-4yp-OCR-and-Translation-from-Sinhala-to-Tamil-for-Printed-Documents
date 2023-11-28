@@ -40,6 +40,7 @@ This is a sample image, to show how to add images to your page. To learn more op
 ![Sample Image](./images/sample.png)
 
 ## Abstract
+sinhala and Tamil are the official national languages of Sri Lanka. But most people only speak or read one of them, making a language barrier. This research aims to create an accessible tool to translate Sinhala documents into Tamil language. Optical Character Recognition (OCR) with the underlying technology of Tesseract is used to identify the characters from documents and using Google Translation API, translation is done. Pre-processing and post-processing techniques are used to improve the accuracy of the system.
 
 ## Related works
 
