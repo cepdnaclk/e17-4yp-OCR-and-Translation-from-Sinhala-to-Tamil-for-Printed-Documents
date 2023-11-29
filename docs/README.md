@@ -105,6 +105,20 @@ These equations allowed for a quantitative assessment of the system's accuracy i
 
 ## Results and Analysis
 
+![1](https://github.com/cepdnaclk/e17-4yp-OCR-and-Translation-from-Sinhala-to-Tamil-for-Printed-Documents/assets/86415619/fe60fdf4-f5b4-4a06-83cd-dfffc42281bc)
+
+The chart above illustrates the percentage of correctly detected sentences based on Equation 1. When sentences were processed through Tesseract without any pre-processing mechanisms, approximately 72.68% were successfully converted. This accuracy significantly improved to 85.87% with the incorporation of suggested pre-processing techniques. Further enhancements were achieved by adding post-processing techniques, resulting in an OCR Accuracy of 86.34%.
+
+This means that the system correctly detected 86.34% of the text, subsequently advancing to the translation process. The visual representation provides insights into the impact of pre-processing and post-processing on the overall accuracy of the Optical Character Recognition (OCR) system.
+
+![2](https://github.com/cepdnaclk/e17-4yp-OCR-and-Translation-from-Sinhala-to-Tamil-for-Printed-Documents/assets/86415619/fbc98162-37db-4ca1-97f2-6cbeeedb04d2)
+
+The chart above depicts the percentage of correctly translated sentences based on Equation 2. When sentences were processed through the Google API without any pre-processing mechanisms, nearly 63% of Sinhala sentences were translated accurately. After implementing Canny and Binarization as pre-processing techniques, the translation rate improved significantly to 71.35%.
+
+Further refinements were achieved through post-processing, involving the removal of unwanted characters, leading to a translation accuracy of 72.52%. It's noteworthy that 17% of the inaccuracies in Sinhala performance resulted from the unavailability of appropriate source words and symbols in the API, as well as grammatical mistakes in the APIs.
+
+These findings suggest that there is room for improvement in API capabilities. The ongoing enhancement of APIs holds the potential to further improve translation accuracy and address the challenges identified in the current evaluation.
+
 ## Conclusion
 At the end of the research, we were able to develop a tool that is accessible to a diverse user base which enables the translation of Sinhala documents in different formats into editable Tamil texts thereby overcoming linguistic barriers. The system's optical character recognition (OCR) accuracy rate was 85%, and its translation accuracy rate was 77%. These were observed after utilizing pre-processing and post-processing techniques.
 
