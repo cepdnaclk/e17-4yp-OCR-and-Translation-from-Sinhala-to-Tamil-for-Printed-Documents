@@ -54,6 +54,53 @@ The Tesseract OCR extracts the text from the preprocessed images. For text clean
 
 ## Experiment Setup and Implementation
 
+### Experiment Overview
+
+In this research, we used an experiment-based approach to assess our system. The dataset was diverse, including official documents like gazettes and circulars, as well as informal language datasets such as school textbooks and novels to cover different linguistic patterns and potential biases.
+
+The official government website provided original Sinhala documents and their Tamil versions, essential for evaluating the system's Optical Character Recognition (OCR) output and translation accuracy.
+
+The dataset covered a range of file formats, including text and document formats (.txt, .md, .log, .doc, .docx), images (.tif, .tiff, .jpg, .jpeg, .png), and PDFs in various formats.
+
+Our experiment involved:
+1. OCR Processing:
+    -Applied OCR to extract text from images and scanned PDFs.
+2. OCR and Translation Accuracy Assessment:
+    -Compared original Sinhala documents with OCR output.
+    -Assessed the accuracy of Tamil translations.
+3. Output Evaluation:
+    -Evaluated the system's output across different document types and linguistic patterns.
+
+### Experiment Phases
+The experiment was conducted in three distinct phases to systematically assess the system's performance under varying conditions:
+
+**Phase 1: Tesseract Only**
+
+The initial phase involved using the Tesseract OCR system without any preprocessing. This baseline assessment aimed to understand the system's raw performance without additional enhancements.
+
+**Phase 2: Tesseract with Preprocessing**
+
+In the second phase, the Tesseract OCR system was employed alongside preprocessing techniques. This involved refining the input data before applying OCR to improve the overall accuracy. Preprocessing aimed to enhance the system's ability to extract text from diverse document formats.
+
+**Phase 3: Tesseract with Preprocessing and Post-processing**
+
+The final phase incorporated both preprocessing and additional post-processing steps. Post-processing was introduced to further refine the OCR output, addressing any remaining inaccuracies and optimizing the translation accuracy of the Tamil versions. This comprehensive approach aimed to maximize the system's effectiveness in handling a wide range of document types.
+
+![experiment 1](./images/experiment1.png)
+
+
+### Evaluation Metrics 
+
+In each phase, OCR accuracy and translation accuracy were calculated using the following equations to analyze and compare the system's performance at different stages of refinement. This approach provided insights into the impact of preprocessing and post-processing on the overall accuracy and efficiency of the OCR and translation processes:
+
+**OCR Accuracy Equation:**
+
+**Translation Accuracy Equation:**
+
+
+These equations allowed for a quantitative assessment of the system's accuracy in each phase, facilitating a detailed comparison of performance improvements resulting from preprocessing and post-processing interventions.
+
+
 ## Results and Analysis
 
 ## Conclusion
