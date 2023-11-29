@@ -86,16 +86,18 @@ In the second phase, the Tesseract OCR system was employed alongside preprocessi
 
 The final phase incorporated both preprocessing and additional post-processing steps. Post-processing was introduced to further refine the OCR output, addressing any remaining inaccuracies and optimizing the translation accuracy of the Tamil versions. This comprehensive approach aimed to maximize the system's effectiveness in handling a wide range of document types.
 
-![experiment 1](./images/experiment1.png)
-
+![experiment 1](https://github.com/cepdnaclk/e17-4yp-OCR-and-Translation-from-Sinhala-to-Tamil-for-Printed-Documents/assets/86415619/e25aab8d-ba9a-475e-b958-4f4086dc859e)
+![experiment 1 (2)](https://github.com/cepdnaclk/e17-4yp-OCR-and-Translation-from-Sinhala-to-Tamil-for-Printed-Documents/assets/86415619/7a1aaafa-e614-46b6-ba0f-98d7bd811ddf)
 
 ### Evaluation Metrics 
 
 In each phase, OCR accuracy and translation accuracy were calculated using the following equations to analyze and compare the system's performance at different stages of refinement. This approach provided insights into the impact of preprocessing and post-processing on the overall accuracy and efficiency of the OCR and translation processes:
 
 **OCR Accuracy Equation:**
+![Equation 1](https://github.com/cepdnaclk/e17-4yp-OCR-and-Translation-from-Sinhala-to-Tamil-for-Printed-Documents/assets/86415619/10ebb56d-a775-4f7a-8803-7fa083fd2e98)
 
 **Translation Accuracy Equation:**
+![Equation 2](https://github.com/cepdnaclk/e17-4yp-OCR-and-Translation-from-Sinhala-to-Tamil-for-Printed-Documents/assets/86415619/4d8eaabb-6ee3-4e5a-a1bb-66650b7073a5)
 
 
 These equations allowed for a quantitative assessment of the system's accuracy in each phase, facilitating a detailed comparison of performance improvements resulting from preprocessing and post-processing interventions.
